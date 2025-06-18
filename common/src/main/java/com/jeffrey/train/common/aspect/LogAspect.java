@@ -1,4 +1,4 @@
-package com.jeffrey.train.member.aspect;
+package com.jeffrey.train.common.aspect;
 
 
 import cn.hutool.core.util.RandomUtil;
@@ -33,7 +33,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Component
 public class LogAspect {
     public LogAspect() {
-        LOG.info("LogAspect 初始化");
+        LOG.info("LogAspect 初始化 Common");
     }
 
     private final static Logger LOG = LoggerFactory.getLogger(LogAspect.class);
