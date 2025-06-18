@@ -3,6 +3,7 @@ package com.jeffrey.train.member.controller;
 import com.jeffrey.train.member.service.MemberService;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -22,5 +23,10 @@ public class MemberController {
     public Long count()
     {
         return memberService.count();
+    }
+
+    @PostMapping("/register")
+    public long register(String mobile){
+        return memberService.register(mobile);
     }
 }
