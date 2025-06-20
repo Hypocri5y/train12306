@@ -1,5 +1,8 @@
 package com.jeffrey.train.member.req;
 
+import jakarta.validation.constraints.NotBlank;
+import org.springframework.validation.annotation.Validated;
+
 /**
  * @program: train
  * @author: Jeffrey
@@ -7,6 +10,9 @@ package com.jeffrey.train.member.req;
  * @description:
  **/
 public class MemberRegisterReq {
+    // 使用Spring Validation进行参数校验
+    // 注意：需要在调用该封装类作为Controller传入参数的参数前加@Valid才可生效
+    @NotBlank(message = "手机号不能为空")
     private String mobile;
 
     public String getMobile() {

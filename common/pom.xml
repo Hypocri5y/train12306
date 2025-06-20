@@ -54,5 +54,11 @@
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
 
+        <!--同aop模块，因为validation已经在spring-boot-starter-parent定义版本，所以这里不用再次定义-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
     </dependencies>
 </project>

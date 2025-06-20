@@ -19,6 +19,7 @@ import com.jeffrey.train.common.exception.BusinessExceptionEnum;
 import com.jeffrey.train.common.resp.CommonResp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.validation.BindException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -46,7 +47,7 @@ public class ControllerExceptionHandler {
         CommonResp commonResp = new CommonResp();
         LOG.error("系统异常：", e);
         commonResp.setSuccess(false);
-        commonResp.setMessage(e.getMessage());
+        commonResp.setMessage("系统异常，请联系管理员");
         return commonResp;
     }
 
@@ -64,6 +65,22 @@ public class ControllerExceptionHandler {
         LOG.error("业务异常：{}", e.getExceptionEnum().getDesc());
         commonResp.setSuccess(false);
         commonResp.setMessage(e.getExceptionEnum().getDesc());
+        return commonResp;
+    }
+    /**
+     * 业务异常统一处理
+     *
+     * @param e
+     * @return
+     */
+    // @ExceptionHandler参数是某个异常类的class，代表这个方法专门处理该类异常，比如这样：
+    @ExceptionHandler(value = BindException.class)
+    @ResponseBody
+    public CommonResp exceptionHandler(BindException e) {
+        CommonResp commonResp = new CommonResp();
+        LOG.error("校验异常：{}", e.getBindingResult().getAllErrors().get(0));
+        commonResp.setSuccess(false);
+        commonResp.setMessage(e.getBindingResult().getAllErrors().get(0).getDefaultMessage());
         return commonResp;
     }
 
