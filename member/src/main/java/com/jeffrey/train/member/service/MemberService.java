@@ -1,12 +1,14 @@
 package com.jeffrey.train.member.service;
 
+import com.jeffrey.train.common.exception.BusinessException;
+import com.jeffrey.train.common.exception.BusinessExceptionEnum;
 import com.jeffrey.train.member.domain.Member;
 import com.jeffrey.train.member.domain.MemberExample;
 import com.jeffrey.train.member.mapper.MemberMapper;
 import com.jeffrey.train.member.req.MemberRegisterReq;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RestController;
+
 
 import java.util.List;
 
@@ -36,7 +38,7 @@ public class MemberService {
         List<Member> list = memberMapper.selectByExample(memberExample);
         // 也可使用hutool的CollUtil.isNotEmpty(list)判空
         if (!(null == list || list.isEmpty())) {
-            throw new RuntimeException("手机号已注册");
+            throw new BusinessException(BusinessExceptionEnum.MEMBER_MOBILE_EXIST);
         }
         Member member = new Member();
         member.setId(System.currentTimeMillis());

@@ -14,6 +14,8 @@ package com.jeffrey.train.common.controller;
  * @InitBinder: 该注解作用于方法上,用于将前端请求的特定类型的参数在到达controller之前进行处理，从而达到转换请求参数格式的目的。
  * @ModelAttribute： 该注解作用于方法和请求参数上，在方法上时设置一个值，可以直接在进入controller后传入该参数。
  */
+import com.jeffrey.train.common.exception.BusinessException;
+import com.jeffrey.train.common.exception.BusinessExceptionEnum;
 import com.jeffrey.train.common.resp.CommonResp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,7 +38,7 @@ public class ControllerExceptionHandler {
     // @ExceptionHandler参数是某个异常类的class，代表这个方法专门处理该类异常，比如这样：
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
-    public CommonResp exceptionHandler(Exception e) throws Exception {
+    public CommonResp exceptionHandler(Exception e) {
         // // 如果是在一次全局事务里出异常了，就不要包装返回值，将异常抛给调用方，让调用方回滚事务
         // if (StrUtil.isNotBlank(RootContext.getXID())) {
         //     throw e;
@@ -45,6 +47,23 @@ public class ControllerExceptionHandler {
         LOG.error("系统异常：", e);
         commonResp.setSuccess(false);
         commonResp.setMessage(e.getMessage());
+        return commonResp;
+    }
+
+    /**
+     * 业务异常统一处理
+     *
+     * @param e
+     * @return
+     */
+    // @ExceptionHandler参数是某个异常类的class，代表这个方法专门处理该类异常，比如这样：
+    @ExceptionHandler(value = BusinessException.class)
+    @ResponseBody
+    public CommonResp exceptionHandler(BusinessException e) {
+        CommonResp commonResp = new CommonResp();
+        LOG.error("业务异常：{}", e.getExceptionEnum().getDesc());
+        commonResp.setSuccess(false);
+        commonResp.setMessage(e.getExceptionEnum().getDesc());
         return commonResp;
     }
 
