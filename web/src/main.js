@@ -31,6 +31,7 @@ axios.interceptors.response.use(function (response) {
 });
 
 // 读取环境配置文件
+// package.json的scripts中指定了--mode dev，则自动读取web根目录中的.env.dev配置文件
 console.log('环境：', process.env.NODE_ENV);
 console.log('服务端：', process.env.VUE_APP_SERVER);
 // 自动设置Axios的Base URL
