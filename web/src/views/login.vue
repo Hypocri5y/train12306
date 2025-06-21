@@ -42,17 +42,27 @@
 </template>
 <script>
 import {defineComponent, reactive} from 'vue';
+import axios from 'axios';
 
 export default defineComponent({
   setup() {
     // 声明reactive响应式变量
     const loginForm = reactive({
-      mobile: '100',
+      mobile: '12345678900',
       code: '',
     });
     // 声明事件
     const sendCode = () => {
-      // TODO
+      axios.post("http://localhost:8000/member/send-code", {
+        mobile: loginForm.mobile
+      }).then(response => {
+        let data = response.data;
+        if (data.success) {
+          loginForm.code = "8888";
+        } else {
+          //   TODO
+        }
+      });
     };
     const login = () => {
       // TODO
