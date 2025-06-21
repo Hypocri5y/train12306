@@ -1,17 +1,15 @@
-package com.jeffrey.train.member.domain;
+package com.jeffrey.train.member.resp;
 
-public class Member {
+/**
+ * @program: train
+ * @author: Jeffrey
+ * @create: 2025-06-22 02:16
+ * @description:
+ **/
+public class MemberLoginResp {
     private Long id;
 
     private String mobile;
-
-    public Member() {
-    }
-
-    public Member(Long id, String mobile) {
-        this.id = id;
-        this.mobile = mobile;
-    }
 
     public Long getId() {
         return id;
@@ -39,5 +37,10 @@ public class Member {
         sb.append(", mobile=").append(mobile);
         sb.append("]");
         return sb.toString();
+    }
+
+    public MemberLoginResp(Long id, String mobile) {
+        this.id = id;
+        this.mobile = mobile;
     }
 }

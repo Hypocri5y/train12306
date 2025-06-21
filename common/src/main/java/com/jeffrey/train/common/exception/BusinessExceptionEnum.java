@@ -7,7 +7,7 @@ package com.jeffrey.train.common.exception;
  * @description:
  **/
 public enum BusinessExceptionEnum {
-    MEMBER_MOBILE_EXIST("手机号码已存在");
+    MEMBER_MOBILE_EXIST("手机号码已存在"),MEMBER_MOBILE_NOT_EXIST("请先获取短信验证码");
 
     private String desc;
 
