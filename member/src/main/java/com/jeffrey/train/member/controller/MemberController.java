@@ -41,8 +41,9 @@ public class MemberController {
         return new CommonResp<>(count);
     }
     @PostMapping("/send-code")
-    public void sendCode(@Valid @RequestBody MemberSendCodeReq req){
-        memberService.sendCode(req);
+    public CommonResp sendCode(@Valid @RequestBody MemberSendCodeReq req){
+        CommonResp commonResp = memberService.sendCode(req);
+        return commonResp;
     }
     @PostMapping("/login")
     public CommonResp<MemberLoginResp> login(@Valid @RequestBody MemberLoginReq req){

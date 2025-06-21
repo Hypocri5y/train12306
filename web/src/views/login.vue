@@ -43,6 +43,7 @@
 <script>
 import {defineComponent, reactive} from 'vue';
 import axios from 'axios';
+import {notification} from "ant-design-vue";
 
 export default defineComponent({
   setup() {
@@ -57,10 +58,24 @@ export default defineComponent({
       axios.post("http://localhost:8000/member/send-code", {
         mobile: loginForm.mobile
       }).then(response => {
+        let data = response.data;
+        if (data.success) {
+          notification.success({description: '短信验证码发送成功'});
+          loginForm.code = "8888";
+        } else {
+          notification.error({description: data.message});
+        }
       });
     };
     const login = () => {
-      // TODO
+      axios.post("http://localhost:8000/member/login", loginForm).then((response) => {
+        let data = response.data;
+        if (data.success) {
+          notification.success({description: '登录成功'});
+        } else {
+          notification.error({description: data.message});
+        }
+      })
     };
     // return可将变量、事件暴露给html使用
     return {
