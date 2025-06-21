@@ -53,15 +53,10 @@ export default defineComponent({
     });
     // 声明事件
     const sendCode = () => {
+      console.log(loginForm.mobile)
       axios.post("http://localhost:8000/member/send-code", {
         mobile: loginForm.mobile
       }).then(response => {
-        let data = response.data;
-        if (data.success) {
-          loginForm.code = "8888";
-        } else {
-          //   TODO
-        }
       });
     };
     const login = () => {
