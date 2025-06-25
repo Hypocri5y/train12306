@@ -6,7 +6,7 @@
       </router-link>
     </div>
     <div style="float: right; color: white;">
-      您好
+      您好:{{member.mobile}} &nbsp;&nbsp;
       <router-link to="/login" style="color: white;">
         退出登录
       </router-link>
@@ -53,11 +53,16 @@
 
 <script>
 import {defineComponent} from 'vue';
+import store from "@/store";
 
 export default defineComponent({
   name: "ConsoleHeaderView",
   setup() {
 
+    let member = store.state.member;
+    return {
+      member
+    }
   },
 });
 </script>

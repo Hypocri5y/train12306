@@ -76,6 +76,7 @@ export default defineComponent({
         let data = response.data;
         if (data.success) {
           notification.success({description: '登录成功'});
+          store.commit("setMember", data.content)
           // 登录成功，跳到控制台主页
           router.push("/");
         } else {
