@@ -5,28 +5,27 @@ GET http://localhost:8001/member/hello
 GET http://localhost:8000/member/hello
 ###
 
-GET http://localhost:8001/member/count
+GET http://localhost:8001/member/member/count
 ###
 
-GET http://localhost:8000/member/hello
-###
 
-POST http://localhost:8000/member/register
+POST http://localhost:8000/member/member/register
 Content-Type: application/x-www-form-urlencoded
 
 mobile=1234567
 
 ###
-POST http://localhost:8000/member/send-code
+POST http://localhost:8000/member/member/send-code
 Content-Type: application/json
 
 {
   "mobile": 12345678900
+
 }
 
 ###
 
-POST http://localhost:8000/member/login
+POST http://localhost:8000/member/member/login
 Content-Type: application/json
 
 {

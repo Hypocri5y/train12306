@@ -14,11 +14,13 @@ package com.jeffrey.train.common.controller;
  * @InitBinder: 该注解作用于方法上,用于将前端请求的特定类型的参数在到达controller之前进行处理，从而达到转换请求参数格式的目的。
  * @ModelAttribute： 该注解作用于方法和请求参数上，在方法上时设置一个值，可以直接在进入controller后传入该参数。
  */
+import cn.hutool.core.util.RandomUtil;
 import com.jeffrey.train.common.exception.BusinessException;
 import com.jeffrey.train.common.exception.BusinessExceptionEnum;
 import com.jeffrey.train.common.resp.CommonResp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -45,6 +47,7 @@ public class ControllerExceptionHandler {
         //     throw e;
         // }
         CommonResp commonResp = new CommonResp();
+        MDC.put("LOG_ID", System.currentTimeMillis() + RandomUtil.randomString(3));
         LOG.error("系统异常：", e);
         commonResp.setSuccess(false);
         commonResp.setMessage("系统异常，请联系管理员");
@@ -62,6 +65,7 @@ public class ControllerExceptionHandler {
     @ResponseBody
     public CommonResp exceptionHandler(BusinessException e) {
         CommonResp commonResp = new CommonResp();
+        MDC.put("LOG_ID", System.currentTimeMillis() + RandomUtil.randomString(3));
         LOG.error("业务异常：{}", e.getExceptionEnum().getDesc());
         commonResp.setSuccess(false);
         commonResp.setMessage(e.getExceptionEnum().getDesc());
@@ -78,6 +82,7 @@ public class ControllerExceptionHandler {
     @ResponseBody
     public CommonResp exceptionHandler(BindException e) {
         CommonResp commonResp = new CommonResp();
+        MDC.put("LOG_ID", System.currentTimeMillis() + RandomUtil.randomString(3));
         LOG.error("校验异常：{}", e.getBindingResult().getAllErrors().get(0));
         commonResp.setSuccess(false);
         commonResp.setMessage(e.getBindingResult().getAllErrors().get(0).getDefaultMessage());

@@ -8,10 +8,7 @@ import com.jeffrey.train.member.resp.MemberLoginResp;
 import com.jeffrey.train.member.service.MemberService;
 import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @program: train
@@ -19,7 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
  * @create: 2025-06-19 00:18
  * @description:
  **/
-@RestController
+@RestController("/member")
+@RequestMapping("/member")
 public class MemberController {
 
     @Resource
