@@ -2,9 +2,11 @@ package com.jeffrey.train.member.service;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.RandomUtil;
+import cn.hutool.jwt.JWTUtil;
 import com.jeffrey.train.common.exception.BusinessException;
 import com.jeffrey.train.common.exception.BusinessExceptionEnum;
 import com.jeffrey.train.common.resp.CommonResp;
@@ -21,6 +23,7 @@ import org.springframework.stereotype.Service;
 
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @program: train
@@ -119,7 +122,11 @@ public class MemberService {
         if (!"8888".equals(code)) {
             throw new BusinessException(BusinessExceptionEnum.MEMBER_MOBILE_CODE_ERROR);
         }
+
+        MemberLoginResp resp = BeanUtil.copyProperties(memberDB, MemberLoginResp.class);
+        String token = com.jeffrey.train.common.util.JWTUtil.createToken(resp.getId(), resp.getMobile());
+        resp.setToken(token);
         // 将用户信息拷贝为封装返回类并返回
-        return BeanUtil.copyProperties(memberDB,MemberLoginResp.class);
+        return resp;
     }
 }
