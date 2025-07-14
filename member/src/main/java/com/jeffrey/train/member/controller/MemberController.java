@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
  * @create: 2025-06-19 00:18
  * @description:
  **/
-@RestController("/member")
+@RestController
 @RequestMapping("/member")
 public class MemberController {
 

@@ -25,7 +25,6 @@ public enum PassengerTypeEnum {
         this.code = code;
         this.desc = desc;
     }
-
     public String getCode() {
         return code;
     }
