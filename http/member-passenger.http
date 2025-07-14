@@ -7,3 +7,15 @@ Content-Type: application/json
   "idCard": "123321",
   "type": "1"
 }
+
+###
+POST http://localhost:8000/member/passenger/save
+Content-Type: application/json
+token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYmYiOjE3NTI1MjcyNjcsIm1vYmlsZSI6IjEyMzQ1Njc4OTAwIiwiaWQiOjE5MzY0NzAxNTEzOTAxNzExMzYsImV4cCI6MTc1MjYxMzY2NywiaWF0IjoxNzUyNTI3MjY3fQ.J0QIk52nitFqf-dqI3cjUQVszhaL71AdvdY9_baZ5AA
+
+{
+  "memberId": 1,
+  "name": "test1",
+  "idCard": "123321",
+  "type": "1"
+}
